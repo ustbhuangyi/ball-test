@@ -66,8 +66,10 @@ export default {
     },
     dropping (el, done) {
       this._reflow = document.body.offsetHeight
+      el.style.transition = 'all 0.5s cubic-bezier(0.49, -0.29, 0.75, 0.41)'
       el.style.transform = el.style.webkitTransform = `translate3d(0,0,0)`
       const inner = el.getElementsByClassName('inner-hook')[0]
+      inner.style.transition = 'all 0.5s linear'
       inner.style.transform = inner.style.webkitTransform = `translate3d(0,0,0)`
       el.addEventListener('transitionend', done)
     },
@@ -75,7 +77,10 @@ export default {
       const ball = this.dropBalls.shift()
       if (ball) {
         ball.show = false
+        const inner = el.getElementsByClassName('inner-hook')[0]
         el.style.display = 'none'
+        el.style.transition = 'none'
+        inner.style.transition = 'none'
       }
     }
   }
@@ -99,13 +104,13 @@ export default {
       .ball
         position: absolute
         z-index: 200
-        transition: all 0.5s cubic-bezier(0.49, -0.29, 0.75, 0.41)
+        // transition: all 0.5s cubic-bezier(0.49, -0.29, 0.75, 0.41)
 
         .inner
           width: 16px
           height: 16px
           border-radius: 50%
           background: blue
-          transition: all 0.5s linear
+          // transition: all 0.5s linear
 
 </style>
